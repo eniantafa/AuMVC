@@ -1,0 +1,54 @@
+﻿@model AuMVC.Data.ViewModels.MaintenanceViewModel
+@{
+    ViewBag.Title = "CreateMaintenance";
+}
+
+<h2>CreateMaintenance</h2>
+
+@using (Html.BeginForm("CreateMaintenance", "Maintenance", FormMethod.Post))
+{
+
+
+    <form>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.IssueCode)
+            @Html.TextBoxFor(m => m.IssueCode, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.IssueCode, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.DateRaised)
+            @Html.TextBoxFor(m => m.DateRaised, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Category)
+            @Html.TextBoxFor(m => m.Category, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Item)
+            @Html.TextBoxFor(m => m.Item, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Priority)
+            @Html.TextBoxFor(m => m.Priority, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Status)
+            @Html.TextBoxFor(m => m.Status, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Note)
+            @Html.TextBoxFor(m => m.Note, new { @class = "form-control" })
+        </div>
+
+
+        <button type="button" class="btn btn-primary">Save</button>
+    </form>
+
+}
