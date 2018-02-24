@@ -1,0 +1,40 @@
+﻿@using AuMVC.Data.Models
+@model List<ProgressStage>
+
+@{
+    ViewData["Title"] = "IndexProgressStage";
+}
+
+<table class="table table-bordered table-hover">
+
+    <tr class="info">
+        <td>Stage</td>
+        <td>Value</td>
+        <td>Date Completes</td>
+        <td>Completed By</td>
+        <td>Date Approved</td>
+        <td>Approved by</td>
+        <td>Payment Status</td>
+        <td>Date Paid</td>
+
+    </tr>
+    <tbody>
+        @foreach (ProgressStage progressStage in Model)
+        {
+            <tr>
+                <td>@progressStage.Stage</td>
+                <td>@progressStage.Value</td>
+                <td>@progressStage.DateCompleted</td>
+                <td>@progressStage.DateApproved</td>
+                <td>@progressStage.ApprovedBy</td>
+                <td>@progressStage.PaymentStatus</td>
+                <td>@progressStage.DatePaid</td>
+
+                <td>@Html.ActionLink("Edit this Progress Stage", "EditProgressStage", "ProgressStage", new { @id = progressStage.Id })</td>
+                <td>@Html.ActionLink("Create a Progress Stage", "CreateProgressStage", "ProgressStage", new { @id = progressStage.Id })</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

@@ -1,0 +1,40 @@
+﻿@using AuMVC.Data.Models
+@model List<Issue>
+
+@{
+    ViewData["Title"] = "IndexIssue";
+}
+
+<table class="table table-bordered table-hover">
+
+
+
+    <tr class="info">
+        <td>Issue Code</td>
+        <td>Date</td>
+        <td>Category</td>
+        <td>Issue Item</td>
+        <td>Priority</td>
+        <td>Status</td>
+        <td>Note</td>
+
+    </tr>
+    <tbody>
+        @foreach (Issue issue in Model)
+        {
+            <tr>
+                <td>@issue.Code</td>
+                <td>@issue.Date</td>
+                <td>@issue.Category</td>
+                <td>@issue.Item</td>
+                <td>@issue.Priority</td>
+                <td>@issue.Status</td>
+                <td>@issue.Note</td>
+                <td>@Html.ActionLink("Edit this Issue", "EditIssue", "Issue", new { @id = issue.Id })</td>
+                <td>@Html.ActionLink("Create a Issue", "CreateIssue", "Issue", new { @id = issue.Id })</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

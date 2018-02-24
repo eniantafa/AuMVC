@@ -18,6 +18,17 @@ namespace AuMVC.Controllers
             _context = context;
         }
 
+
+        //all maintenances--
+        
+        public ActionResult IndexMaintenance()
+        {
+            List<Maintenance> maintenances = _context.Maintenances.ToList();
+            return View(maintenances);
+        }
+
+
+
         // GET: Maintenance
         public ActionResult CreateMaintenance()
         {
@@ -39,7 +50,7 @@ namespace AuMVC.Controllers
 
             Maintenance maintenance = new Maintenance()
             {
-                IssueCode = viewModel.IssueCode, //ask
+                IssueCode = viewModel.IssueCode, 
                 DateRaised = DateTime.Now,
                 Category = viewModel.Category,
                 Item = viewModel.Item,
@@ -50,6 +61,28 @@ namespace AuMVC.Controllers
             };
 
             _context.Maintenances.Add(maintenance);
+            _context.SaveChanges();
+
+            return View();
+        }
+        public ActionResult EditMaintenance(int id)
+        {
+                Maintenance myMaintenance = _context.Maintenances.Where(n => n.Id == id).FirstOrDefault();
+                return View(myMaintenance);
+        }
+
+        public ActionResult EditConfirm(Maintenance maintenance)
+        {
+            Maintenance oldMaintenance = _context.Maintenances.Where(n => n.Id == maintenance.Id).FirstOrDefault();
+            oldMaintenance.IssueCode = maintenance.IssueCode;
+            oldMaintenance.DateRaised = maintenance.DateRaised;
+            oldMaintenance.Item = maintenance.Item;
+            oldMaintenance.Priority = maintenance.Priority;
+            oldMaintenance.Status = maintenance.Status;
+            oldMaintenance.Note = maintenance.Note;
+            
+
+            //_context.Sites.AddOrUpdate(oldSite);
             _context.SaveChanges();
 
             return View();

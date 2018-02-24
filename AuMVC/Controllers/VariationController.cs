@@ -20,6 +20,14 @@ namespace AuMVC.Controllers
         }
 
 
+
+        //all variations--
+        public ActionResult IndexVariation()
+        {
+            List<Variation> variation = _context.Variations.ToList();
+            return View(variation);
+        }
+
         // GET: Variation
         public ActionResult CreateVariation()
         {
@@ -63,5 +71,38 @@ namespace AuMVC.Controllers
             return View();
 
         }
+
+        public ActionResult EditVariation(int id)
+        {
+            using (AppDbContext ctx = new AppDbContext())
+            {
+                Variation myVariation = ctx.Variations.Where(n => n.Id == id).FirstOrDefault();
+                return View(myVariation);
+            }
+        }
+
+        public ActionResult EditConfirm(Variation variation)
+        {
+            Variation oldVariation = _context.Variations.Where(n => n.Id == variation.Id).FirstOrDefault();
+            oldVariation.VariationCode = variation.VariationCode;
+            oldVariation.DateReleased = variation.DateReleased;
+            oldVariation.Contract = variation.Contract;
+            oldVariation.Location = variation.Location;
+            oldVariation.Description = variation.Description;
+            oldVariation.Comment = variation.Comment;
+            oldVariation.Price = variation.Price;
+            oldVariation.EOT = variation.EOT;
+            oldVariation.Status = variation.Status;
+            oldVariation.Claimed = variation.Claimed;
+            oldVariation.Paid = variation.Paid;
+            oldVariation.PaymentDate = variation.PaymentDate;
+            //futen vlerat e tjera
+
+            //_context.Sites.AddOrUpdate(oldSite);
+            _context.SaveChanges();
+
+            return View();
+        }
     }
 }
+

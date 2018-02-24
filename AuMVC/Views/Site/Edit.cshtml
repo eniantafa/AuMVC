@@ -1,0 +1,73 @@
+﻿@model AuMVC.Data.Models.Site
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm("EditConfirm", "Site", FormMethod.Post))
+{
+    @Html.HiddenFor(m=>m.Id)
+    <div class="form-group">
+        @Html.LabelFor(m => m.SiteNumber)
+        @Html.TextBoxFor(m => m.SiteNumber, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.SiteNumber, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.HomeOwner)
+        @Html.TextBoxFor(m => m.HomeOwner, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ContactNumber)
+        @Html.TextBoxFor(m => m.ContactNumber, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ContactEmail)
+        @Html.TextBoxFor(m => m.ContactEmail, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.HouseType)
+        @Html.TextBoxFor(m => m.HouseType, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ContractValueExGST)
+        @Html.TextBoxFor(m => m.ContractValueExGST, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ContractValueIncGST)
+        @Html.TextBoxFor(m => m.ContractValueIncGST, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ContractDate)
+        @Html.TextBoxFor(m => m.ContractDate, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.PreContactEOT)
+        @Html.TextBoxFor(m => m.PreContactEOT, new { @class = "form-control" })
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.DOPCDate)
+        @Html.TextBoxFor(m => m.DOPCDate, new { @class = "form-control" })
+    </div>
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Note)
+        @Html.TextBoxFor(m => m.Note, new { @class = "form-control" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+
+}

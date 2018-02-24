@@ -1,0 +1,75 @@
+﻿@model AuMVC.Data.Models.Variation
+@{
+    ViewData["Title"] = "EditVariation";
+}
+
+<h2>EditVariation</h2>
+
+
+@using (Html.BeginForm("EditConfirm", "Variation", FormMethod.Post))
+{
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.VariationCode)
+        @Html.TextBoxFor(m => m.VariationCode, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.VariationCode, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.DateReleased)
+        @Html.TextBoxFor(m => m.DateReleased, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Contract)
+        @Html.TextBoxFor(m => m.Contract, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Location)
+        @Html.TextBoxFor(m => m.Location, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Description)
+        @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Comment)
+        @Html.TextBoxFor(m => m.Comment, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Price)
+        @Html.TextBoxFor(m => m.Price, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.EOT)
+        @Html.TextBoxFor(m => m.EOT, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Status)
+        @Html.TextBoxFor(m => m.Status, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Claimed)
+        @Html.TextBoxFor(m => m.Claimed, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Paid)
+        @Html.TextBoxFor(m => m.Paid, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.PaymentDate)
+        @Html.TextBoxFor(m => m.PaymentDate, new { @class = "form-control" })
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Save</button>
+}

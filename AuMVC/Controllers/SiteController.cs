@@ -18,7 +18,12 @@ namespace AuMVC.Controllers
             _context = context;
         }
 
-        // GET: Site
+        // GET: All Sites
+        public ActionResult Index()
+        {
+            List<Site> sites = _context.Sites.ToList();
+            return View(sites);
+        }
 
         public ActionResult CreateSite()
         {
@@ -61,18 +66,25 @@ namespace AuMVC.Controllers
 
         public ActionResult Edit(int id)
         {
-            using (AppDbContext ctx = new AppDbContext())
-            {
-                Site mySite = ctx.Sites.Where(n => n.Id == id).FirstOrDefault();
-                return View(mySite);
-            }
+            Site mySite = _context.Sites.Where(n => n.Id == id).FirstOrDefault();
+            return View(mySite);
         }
 
         public ActionResult EditConfirm(Site site)
         {
             Site oldSite = _context.Sites.Where(n => n.Id == site.Id).FirstOrDefault();
             oldSite.HomeOwner = site.HomeOwner;
-            //futen vlerat e tjera
+            oldSite.SiteNumber = site.SiteNumber;
+            oldSite.ContractDate = site.ContractDate;
+            oldSite.ContactNumber = site.ContactNumber;
+            oldSite.ContactEmail = site.ContactEmail;
+            oldSite.HouseType = site.HouseType;
+            oldSite.ContractValueExGST = site.ContractValueExGST;
+            oldSite.ContractValueIncGST = site.ContractValueIncGST;
+            oldSite.PreContactEOT = site.PreContactEOT;
+            oldSite.DOPCDate = site.DOPCDate;
+            oldSite.TwelveMonthMaintenance = site.TwelveMonthMaintenance;
+            oldSite.Note = site.Note;
 
             //_context.Sites.AddOrUpdate(oldSite);
             _context.SaveChanges();

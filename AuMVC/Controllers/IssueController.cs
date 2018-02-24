@@ -18,6 +18,14 @@ namespace AuMVC.Controllers
             _context = context;
         }
 
+
+        //all issues--
+        public ActionResult IndexIssue()
+        {
+            List<Issue> issues = _context.Issues.ToList();
+            return View(issues);
+        }
+
         // GET: Issue
         public ActionResult CreateIssue()
         {
