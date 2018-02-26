@@ -7,5 +7,8 @@ namespace AuMVC.Data.Enums
 {
     public enum MaintenanceStatus
     {
+        M1Stat,
+        M2Stat,
+        M3Stat
     }
 }

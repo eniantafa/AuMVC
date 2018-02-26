@@ -7,5 +7,7 @@ namespace AuMVC.Data.Enums
 {
     public enum ProgressStagePaymentStatus
     {
+        PSPS1,
+        PSPS2
     }
 }

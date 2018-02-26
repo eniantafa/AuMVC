@@ -7,5 +7,8 @@ namespace AuMVC.Data.Enums
 {
     public enum MaintenancePriority
     {
+        High,
+        Medium,
+        Low
     }
 }

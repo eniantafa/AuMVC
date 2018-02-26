@@ -5,43 +5,41 @@
     ViewData["Title"] = "Index";
 }
 
-<table class="table table-bordered table-hover">
-
-
-
-    <tr class="info">
-        
-        <td>Site Number</td>
-        <td>Home Owner</td>
-        <td>Contact Number</td>
-        <td>House Type</td>
-        <td>Contract Value ExGST</td>
-        <td>Contract Value IncGST</td>
-        <td>Contract Date</td>
-        <td>PreContact EOT</td>
-        <td>DOPC Date</td>
-        <td>Twelve Month Maintenance</td>
-        <td>Note</td>
-        
-    </tr>
+<table class="table">
+    <thead>
+        <tr>
+            <td>Site Number</td>
+            <td>Home Owner</td>
+            <td>Contact Number</td>
+            <td>House Type</td>
+            <td>Contract Value ExGST</td>
+            <td>Contract Value IncGST</td>
+            <td>Contract Date</td>
+            <td>PreContact EOT</td>
+            <td>DOPC Date</td>
+            <td>Twelve Month Maintenance</td>
+            <td>Note</td>
+        </tr>
+    </thead>
+    
     <tbody>
         @foreach (Site site in Model)
         {
-            <tr>
-                <td>@site.SiteNumber</td>
-                <td>@site.HomeOwner</td>
-                <td>@site.ContactNumber</td>
-                <td>@site.HouseType</td>
-                <td>@site.ContractValueExGST</td>
-                <td>@site.ContractValueIncGST</td>
-                <td>@site.ContractDate</td>
-                <td>@site.PreContactEOT</td>
-                <td>@site.DOPCDate</td>
-                <td>@site.TwelveMonthMaintenance</td>
-                <td>@site.Note</td>
-                <td>@Html.ActionLink("Edit this Site", "Edit", "Site", new { @id = site.Id })</td>
-                <td>@Html.ActionLink("Create a Site", "Create", "Site", new { @id = site.Id })</td>
-            </tr>
+        <tr>
+            <td>@site.SiteNumber</td>
+            <td>@site.HomeOwner</td>
+            <td>@site.ContactNumber</td>
+            <td>@site.HouseType</td>
+            <td>@site.ContractValueExGST</td>
+            <td>@site.ContractValueIncGST</td>
+            <td>@site.ContractDate</td>
+            <td>@site.PreContactEOT</td>
+            <td>@site.DOPCDate</td>
+            <td>@site.TwelveMonthMaintenance</td>
+            <td>@site.Note</td>
+            <td>@Html.ActionLink("Edit", "Edit", "Site", new { @id = site.Id})</td>
+            <td>@Html.ActionLink("Delete", "Delete", "Site", new { @id = site.Id })</td>
+        </tr>
         }
     </tbody>
 </table>

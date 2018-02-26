@@ -20,7 +20,7 @@
 
         <div class="form-group">
             @Html.LabelFor(m => m.Date)
-            @Html.TextBoxFor(m => m.Date, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.Date, new { @class = "form-control", @type="date" })
         </div>
 
         <div class="form-group">
@@ -30,7 +30,9 @@
 
         <div class="form-group">
             @Html.LabelFor(m => m.Priority)
-            @Html.TextBoxFor(m => m.Priority, new { @class = "form-control" })
+
+
+            @Html.TextBoxFor(m => m.Priority, new { @class = "form-control", @type="enumdropdownlist" })
         </div>
 
         <div class="form-group">

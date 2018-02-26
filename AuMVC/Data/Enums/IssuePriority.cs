@@ -7,5 +7,8 @@ namespace AuMVC.Data.Enums
 {
     public enum IssuePriority
     {
+        High,
+        Medium,
+        Low
     }
 }

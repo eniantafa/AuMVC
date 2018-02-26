@@ -7,5 +7,8 @@ namespace AuMVC.Data.Enums
 {
     public enum IssueCategory
     {
+        Category1,
+        Category2,
+        Category3
     }
 }

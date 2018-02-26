@@ -7,5 +7,8 @@ namespace AuMVC.Data.Enums
 {
     public enum VariationStatus
     {
+        Vs1,
+        Vs2,
+        Vs3
     }
 }

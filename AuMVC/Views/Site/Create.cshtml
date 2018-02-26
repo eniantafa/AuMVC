@@ -10,7 +10,7 @@
 {
 
 
-    <div class="form-group">
+    <div class="form-group has-success has-feedback">
         @Html.LabelFor(m => m.SiteNumber)
         @Html.TextBoxFor(m => m.SiteNumber, new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.SiteNumber, "", new { @class = "text-danger" })
@@ -48,7 +48,7 @@
 
     <div class="form-group">
         @Html.LabelFor(m => m.ContractDate)
-        @Html.TextBoxFor(m => m.ContractDate, new { @class = "form-control" })
+        @Html.TextBoxFor(m => m.ContractDate, new { @class = "form-control", @type="date" })
     </div>
 
     <div class="form-group">
@@ -57,7 +57,7 @@
     </div>
 
 
-    <div class="form-group">
+    <div class="form-group" >
         @Html.LabelFor(m => m.DOPCDate)
         @Html.TextBoxFor(m => m.DOPCDate, new { @class = "form-control" })
     </div>

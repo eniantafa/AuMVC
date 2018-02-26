@@ -7,5 +7,8 @@ namespace AuMVC.Data.Enums
 {
     public enum IssueStatus
     {
+        IssueStatus1,
+        IssueStatus2,
+        IssueStatus3
     }
 }

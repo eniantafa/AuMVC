@@ -7,5 +7,8 @@ namespace AuMVC.Data.Enums
 {
     public enum VariationContract
     {
+        Var1,
+        Var2,
+        Var3
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using AuMVC.Data;
 using AuMVC.Data.Models;
@@ -32,14 +33,17 @@ namespace AuMVC.Controllers
 
 
         //[HttpPost]
+       
         public ActionResult Create(SiteViewModel viewModel)
-        {
+        { 
+
+        
             if (!ModelState.IsValid)
             {
                 ModelState.AddModelError("", "Site Problem");
 
                 return View();
-                //Redirect tek nje error page
+                //Redirect tek nje error pge
             }
 
             Site site = new Site()
@@ -70,6 +74,7 @@ namespace AuMVC.Controllers
             return View(mySite);
         }
 
+        [ValidateAntiForgeryToken]
         public ActionResult EditConfirm(Site site)
         {
             Site oldSite = _context.Sites.Where(n => n.Id == site.Id).FirstOrDefault();
@@ -90,6 +95,33 @@ namespace AuMVC.Controllers
             _context.SaveChanges();
 
             return View();
+        }
+
+        public ActionResult Delete(int id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("Index");
+            }
+            Site mysite = _context.Sites.Find(id);
+            if ( mysite == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(mysite);
+        }
+
+      
+
+        // POST: Site/Delete
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirm(int id)
+        {
+            Site site = _context.Sites.Find(id);
+            _context.Sites.Remove(site);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
