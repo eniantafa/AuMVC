@@ -5,36 +5,59 @@
     ViewData["Title"] = "IndexProgressStage";
 }
 
-<table class="table table-bordered table-hover">
 
-    <tr class="info">
-        <td>Stage</td>
-        <td>Value</td>
-        <td>Date Completes</td>
-        <td>Completed By</td>
-        <td>Date Approved</td>
-        <td>Approved by</td>
-        <td>Payment Status</td>
-        <td>Date Paid</td>
+@foreach (ProgressStage progressStage in Model)
+{
 
-    </tr>
-    <tbody>
-        @foreach (ProgressStage progressStage in Model)
-        {
-            <tr>
-                <td>@progressStage.Stage</td>
-                <td>@progressStage.Value</td>
-                <td>@progressStage.DateCompleted</td>
-                <td>@progressStage.DateApproved</td>
-                <td>@progressStage.ApprovedBy</td>
-                <td>@progressStage.PaymentStatus</td>
-                <td>@progressStage.DatePaid</td>
+    @Html.ActionLink("Add New", "CreateProgressStage", "ProgressStage", new { @id = progressStage.Id })
+}
 
-                <td>@Html.ActionLink("Edit this Progress Stage", "EditProgressStage", "ProgressStage", new { @id = progressStage.Id })</td>
-                <td>@Html.ActionLink("Create a Progress Stage", "CreateProgressStage", "ProgressStage", new { @id = progressStage.Id })</td>
+@if (Model.Any())
+{
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr class="info">
+                <td>Stage</td>
+                <td>Value</td>
+                <td>Date Completes</td>
+                <td>Completed By</td>
+                <td>Date Approved</td>
+                <td>Approved by</td>
+                <td>Payment Status</td>
+                <td>Date Paid</td>
+
             </tr>
-        }
-    </tbody>
-</table>
+
+        </thead>
+
+        <tbody>
+            @foreach (ProgressStage progressStage in Model)
+            {
+                <tr>
+                    <td>@progressStage.Stage</td>
+                    <td>@progressStage.Value</td>
+                    <td>@progressStage.DateCompleted</td>
+                    <td>@progressStage.DateApproved</td>
+                    <td>@progressStage.ApprovedBy</td>
+                    <td>@progressStage.PaymentStatus</td>
+                    <td>@progressStage.DatePaid</td>
+
+                    <td>@Html.ActionLink("Edit this Progress Stage", "EditProgressStage", "ProgressStage", new { @id = progressStage.Id })</td>
+                    <td>@Html.ActionLink("Create a Progress Stage", "CreateProgressStage", "ProgressStage", new { @id = progressStage.Id })</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+
+
+else
+{
+    <h1 class="text-center text-danger">There are no ProgressStage yet!</h1>
+
+}
+
+
 
 

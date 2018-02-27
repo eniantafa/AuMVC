@@ -5,47 +5,67 @@
     ViewData["Title"] = "IndexVariation";
 }
 
-<table class="table table-bordered table-hover">
 
-    <tr class="info">
-        <td>Variation Code</td>
-        <td>Date Released</td>
-        <td>Contract</td>
-        <td>Location</td>
-        <td>Description</td>
-        <td>Comment</td>
-        <td>Price</td>
-        <td>EOT</td>
-        <td>Status</td>
-        <td>Claimmed</td>
-        <td>Paid</td>
-        <td>Payment Date</td>
+@foreach (Variation variation in Model)
+{
+
+    @Html.ActionLink("Add New", "CreateVariation", "Variation", new { @id = variation.Id })
+}
+
+@if (Model.Any())
+{
+
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr class="info">
+                <td>Variation Code</td>
+                <td>Date Released</td>
+                <td>Contract</td>
+                <td>Location</td>
+                <td>Description</td>
+                <td>Comment</td>
+                <td>Price</td>
+                <td>EOT</td>
+                <td>Status</td>
+                <td>Claimmed</td>
+                <td>Paid</td>
+                <td>Payment Date</td>
 
 
-    </tr>
-    <tbody>
-        @foreach (Variation variation in Model)
-        {
-            <tr>
-                <td>@variation.VariationCode</td>
-                <td>@variation.DateReleased</td>
-                <td>@variation.Contract</td>
-                <td>@variation.Location</td>
-                <td>@variation.Description</td>
-                <td>@variation.Comment</td>
-                <td>@variation.Price</td>
-                <td>@variation.EOT</td>
-                <td>@variation.Status</td>
-                <td>@variation.Claimed</td>
-                <td>@variation.Paid</td>
-                <td>@variation.PaymentDate</td>
-                <td>@Html.ActionLink("Edit this Variation", "EditVariation", "Variation", new { @id = variation.Id })</td>
-                <td>@Html.ActionLink("Create a Variation", "CreateVariation", "Variation", new { @id = variation.Id })</td>
             </tr>
-        }
-    </tbody>
-</table>
+
+        </thead>
+
+
+        <tbody>
+            @foreach (Variation variation in Model)
+            {
+                <tr>
+                    <td>@variation.VariationCode</td>
+                    <td>@variation.DateReleased</td>
+                    <td>@variation.Contract</td>
+                    <td>@variation.Location</td>
+                    <td>@variation.Description</td>
+                    <td>@variation.Comment</td>
+                    <td>@variation.Price</td>
+                    <td>@variation.EOT</td>
+                    <td>@variation.Status</td>
+                    <td>@variation.Claimed</td>
+                    <td>@variation.Paid</td>
+                    <td>@variation.PaymentDate</td>
+                    <td>@Html.ActionLink("Edit this Variation", "EditVariation", "Variation", new { @id = variation.Id })</td>
+                    <td>@Html.ActionLink("Create a Variation", "CreateVariation", "Variation", new { @id = variation.Id })</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 
 
 
+}
 
+else
+{
+    <h1 class="text-center text-danger">There are no Variation yet!</h1>
+
+}

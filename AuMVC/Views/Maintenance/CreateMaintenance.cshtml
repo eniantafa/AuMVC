@@ -1,4 +1,5 @@
-﻿@model AuMVC.Data.ViewModels.MaintenanceViewModel
+﻿@using AuMVC.Data.Enums;
+@model AuMVC.Data.ViewModels.MaintenanceViewModel
 @{
     ViewBag.Title = "CreateMaintenance";
 }
@@ -19,12 +20,14 @@
 
         <div class="form-group">
             @Html.LabelFor(m => m.DateRaised)
-            @Html.TextBoxFor(m => m.DateRaised, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.DateRaised, new { @class = "form-control",@type="date" })
         </div>
 
         <div class="form-group">
             @Html.LabelFor(m => m.Category)
-            @Html.TextBoxFor(m => m.Category, new { @class = "form-control" })
+            @Html.DropDownList("MaintenanceCategory",
+               Html.GetEnumSelectList<MaintenanceCategory>(),
+               "Maintenance Category", new { @class = "form-control" })
         </div>
 
         <div class="form-group">
@@ -34,12 +37,17 @@
 
         <div class="form-group">
             @Html.LabelFor(m => m.Priority)
-            @Html.TextBoxFor(m => m.Priority, new { @class = "form-control" })
+            @Html.DropDownList("MaintenancePriority",
+               Html.GetEnumSelectList<MaintenancePriority>(),
+               "<MaintenancePriority", new { @class = "form-control" })
         </div>
 
         <div class="form-group">
             @Html.LabelFor(m => m.Status)
-            @Html.TextBoxFor(m => m.Status, new { @class = "form-control" })
+          
+            @Html.DropDownList("MaintenanceStatus",
+            Html.GetEnumSelectList<MaintenanceStatus>(),
+            "MaintenanceStatus", new { @class = "form-control" })
         </div>
 
         <div class="form-group">
