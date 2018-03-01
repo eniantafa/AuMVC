@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AuMVC.Data;
 using AuMVC.Data.Models;
+using AuMVC.Data.Services;
 using AuMVC.Data.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,20 +12,32 @@ namespace AuMVC.Controllers
 {
     public class IssueController : Controller
     {
-        private AppDbContext _context;
 
-        public IssueController(AppDbContext context)
+
+
+        private IssueService _issueService;
+
+        public IssueController(IssueService issueService)
         {
-            _context = context;
+            _issueService = issueService;
         }
+
+
+
 
 
         //all issues--
         public ActionResult IndexIssue()
         {
-            List<Issue> issues = _context.Issues.ToList();
+            List<Issue> issues = _issueService.allIssues();
             return View(issues);
         }
+
+
+
+
+
+
 
         // GET: Issue
         public ActionResult CreateIssue()
@@ -44,50 +57,34 @@ namespace AuMVC.Controllers
             }
 
 
-            Issue issue = new Issue()
-            {
-                Code = viewModel.Code,
-                Date = DateTime.Now,
-                Category = viewModel.Category,
-                Item = viewModel.Item,
-                Priority = viewModel.Priority,
-                Status = viewModel.Status,
-                Note = viewModel.Note
-
-            };
-
-            _context.Issues.Add(issue);
-            _context.SaveChanges();
+            _issueService.CreateIssue(viewModel);
 
             return View();
         }
+    
+
+
+
+
+
 
 
         //edit issue
 
         public ActionResult EditIssue(int id)
         {
-            Issue myIssue = _context.Issues.Where(n => n.Id == id).FirstOrDefault();
+            Issue myIssue = _issueService.GetIssueById(id);
             return View(myIssue);
         }
 
         [ValidateAntiForgeryToken]
         public ActionResult EditConfirm(Issue issue)
         {
-            Issue oldIssue = _context.Issues.Where(n => n.Id == issue.Id).FirstOrDefault();
-            oldIssue.Code = issue.Code;
-            oldIssue.Date = issue.Date;
-            oldIssue.Category = issue.Category;
-            oldIssue.Item = issue.Item;
-            oldIssue.Priority = issue.Priority;
-            oldIssue.Status = issue.Status;
-            oldIssue.Note = issue.Note;
-
-
-            //_context.Sites.AddOrUpdate(oldIssue);
-            _context.SaveChanges();
-
+            _issueService.UpdateIssue(issue);
             return View();
+
+        }
+
 
 
             //deleteissue
@@ -99,25 +96,21 @@ namespace AuMVC.Controllers
                     return RedirectToAction("Index");
                 }
 
-                Issue myIssue = _context.Issues.Find(id);
-                if (myIssue == null)
+                
+                if (_issueService.Exists(id))
                 {
                     return RedirectToAction("Index");
                 }
-                return View(myIssue);
+                return View(_issueService.GetIssueById(id));
             }
-        }
-
-
-
+        
+        
 // POST: Issue/Delete
         [HttpPost, ActionName("DeleteIssue")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmIssue(int id)
         {
-            Site site = _context.Sites.Find(id);
-            _context.Sites.Remove(site);
-            _context.SaveChanges();
+            _issueService.Delete(id);
             return RedirectToAction("Index");
         }
     }

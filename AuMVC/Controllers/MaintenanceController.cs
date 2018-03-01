@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AuMVC.Data;
 using AuMVC.Data.Models;
+using AuMVC.Data.Services;
 using AuMVC.Data.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,21 +12,26 @@ namespace AuMVC.Controllers
 {
     public class MaintenanceController : Controller
     {
-        private AppDbContext _context;
 
-        public MaintenanceController(AppDbContext context)
+
+        private MaintenanceService _maintenanceService;
+
+        public MaintenanceController(MaintenanceService maintenanceService)
         {
-            _context = context;
+            _maintenanceService = maintenanceService;
         }
+
 
 
         //all maintenances--
         
         public ActionResult IndexMaintenance()
         {
-            List<Maintenance> maintenances = _context.Maintenances.ToList();
+            List<Maintenance> maintenances = _maintenanceService.allMaintenances();
             return View(maintenances);
         }
+
+
 
 
 
@@ -45,48 +51,34 @@ namespace AuMVC.Controllers
                 return View();
                 //Redirect tek nje error page
             }
+            
 
-
-
-            Maintenance maintenance = new Maintenance()
-            {
-                IssueCode = viewModel.IssueCode, 
-                DateRaised = DateTime.Now,
-                Category = viewModel.Category,
-                Item = viewModel.Item,
-                Priority = viewModel.Priority,
-                Status = viewModel.Status,
-                Note = viewModel.Note
-
-            };
-
-            _context.Maintenances.Add(maintenance);
-            _context.SaveChanges();
-
+            _maintenanceService.CreateMaintenance(viewModel);
             return View();
         }
+
+
+
+
+
+
+        //editmaintenance
         public ActionResult EditMaintenance(int id)
         {
-                Maintenance myMaintenance = _context.Maintenances.Where(n => n.Id == id).FirstOrDefault();
+            Maintenance myMaintenance = _maintenanceService.GetMaintenanceById(id);
                 return View(myMaintenance);
         }
 
         public ActionResult EditConfirm(Maintenance maintenance)
         {
-            Maintenance oldMaintenance = _context.Maintenances.Where(n => n.Id == maintenance.Id).FirstOrDefault();
-            oldMaintenance.IssueCode = maintenance.IssueCode;
-            oldMaintenance.DateRaised = maintenance.DateRaised;
-            oldMaintenance.Item = maintenance.Item;
-            oldMaintenance.Priority = maintenance.Priority;
-            oldMaintenance.Status = maintenance.Status;
-            oldMaintenance.Note = maintenance.Note;
-            
 
-            //_context.Sites.AddOrUpdate(oldSite);
-            _context.SaveChanges();
-
+            _maintenanceService.UpdateMaintenance(maintenance);
             return View();
         }
+
+
+
+
 
 
         //delete maintenance
@@ -96,12 +88,12 @@ namespace AuMVC.Controllers
             {
                 return RedirectToAction("Index");
             }
-            Maintenance myMaintenance = _context.Maintenances.Find(id);
-            if (myMaintenance == null)
+            
+            if (_maintenanceService.Exists(id))
             {
                 return RedirectToAction("Index");
             }
-            return View(myMaintenance);
+            return View(_maintenanceService.GetMaintenanceById(id));
         }
 
 
@@ -111,9 +103,7 @@ namespace AuMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirm(int id)
         {
-            Maintenance maintenance = _context.Maintenances.Find(id);
-            _context.Maintenances.Remove(maintenance);
-            _context.SaveChanges();
+            _maintenanceService.Delete(id);
             return RedirectToAction("IndexMaintenance");
         }
     }

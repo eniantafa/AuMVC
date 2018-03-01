@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AuMVC.Data;
 using AuMVC.Data.Models;
+using AuMVC.Data.Services;
 using AuMVC.Data.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,20 +13,24 @@ namespace AuMVC.Controllers
     public class ProgressStageController : Controller
     {
 
-        private AppDbContext _context;
+        private ProgressStageService _progressStageService;
 
-        public ProgressStageController(AppDbContext context)
+        public ProgressStageController(ProgressStageService progressStageService)
         {
-            _context = context;
+            _progressStageService = progressStageService;
         }
 
 
         //all prog stages--
         public ActionResult IndexProgressStage()
         {
-            List<ProgressStage> progressStage = _context.ProgressStages.ToList();
+            List<ProgressStage> progressStage = _progressStageService.allProgressStages();
             return View(progressStage);
         }
+
+
+
+
 
 
         // GET: ProgressStage
@@ -48,51 +53,39 @@ namespace AuMVC.Controllers
 
 
 
-            ProgressStage progressStage = new ProgressStage()
-            {
-
-                Stage = viewModel.Stage,
-                Value = viewModel.Value,
-                DateCompleted = DateTime.Now,
-                CompletedBy = viewModel.CompletedBy,
-                DateApproved = DateTime.Now.AddMonths(3), 
-                ApprovedBy = viewModel.ApprovedBy,
-                PaymentStatus = viewModel.PaymentStatus,
-                DatePaid = DateTime.Now
-
-            };
-
-            _context.ProgressStages.Add(progressStage);
-            _context.SaveChanges();
+            _progressStageService.CreateProgressStage(viewModel);
 
             return View();
         }
+
+
+
+
+        //edit
+
 
         public ActionResult EditProgressStage(int id)
         {
-            using (AppDbContext ctx = new AppDbContext())
-            {
-                ProgressStage myProgressStage = ctx.ProgressStages.Where(n => n.Id == id).FirstOrDefault();
-                return View(myProgressStage);
-            }
+
+            ProgressStage myProgressStage = _progressStageService.GetProgressStageById(id);
+            return View(myProgressStage);
+
         }
 
+        [ValidateAntiForgeryToken]
         public ActionResult EditConfirm(ProgressStage progressStage)
         {
-            ProgressStage oldProgressStage = _context.ProgressStages.Where(n => n.Id == progressStage.Id).FirstOrDefault();
-            oldProgressStage.Stage = progressStage.Stage;
-            oldProgressStage.Value = progressStage.Value;
-            oldProgressStage.DateCompleted = progressStage.DateCompleted;
-            oldProgressStage.DateApproved = progressStage.DateApproved;
-            oldProgressStage.ApprovedBy = progressStage.ApprovedBy;
-            oldProgressStage.PaymentStatus = progressStage.PaymentStatus;
-            oldProgressStage.DatePaid = oldProgressStage.DatePaid;
-
-            //_context.Sites.AddOrUpdate(oldSite);
-            _context.SaveChanges();
-
+            _progressStageService.UpdateProgressStage(progressStage);
             return View();
+
         }
+
+
+
+
+
+
+
 
         //delete progstage
         public ActionResult DeleteProgressStage(int id)
@@ -101,12 +94,12 @@ namespace AuMVC.Controllers
             {
                 return RedirectToAction("IndexProgressStage");
             }
-            ProgressStage myprogressStage = _context.ProgressStages.Find(id);
-            if (myprogressStage == null)
+
+            if (_progressStageService.Exists(id))
             {
                 return RedirectToAction("IndexProgressStage");
             }
-            return View(myprogressStage);
+            return View(_progressStageService.GetProgressStageById(id));
         }
 
 
@@ -116,11 +109,8 @@ namespace AuMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirm(int id)
         {
-            ProgressStage progressStage = _context.ProgressStages.Find(id);
-            _context.ProgressStages.Remove(progressStage);
-            _context.SaveChanges();
+             _progressStageService.Delete(id);
             return RedirectToAction("IndexProgressStage");
         }
 
-    }
-}
+    } }

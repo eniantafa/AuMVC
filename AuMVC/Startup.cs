@@ -36,7 +36,11 @@ namespace AuMVC
             //Konfigurimi i servisit db server
             services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            //konfigurimi i serviseve
             services.AddTransient<ISiteService, SiteService>();
+            services.AddTransient<IIssueService, IssueService>();
+            services.AddTransient<IMaintenanceService, MaintenanceService>();
             services.AddMvc();
         }
 
