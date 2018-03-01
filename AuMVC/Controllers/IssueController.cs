@@ -104,7 +104,7 @@ namespace AuMVC.Controllers
                 return View(_issueService.GetIssueById(id));
             }
         
-        
+
 // POST: Issue/Delete
         [HttpPost, ActionName("DeleteIssue")]
         [ValidateAntiForgeryToken]

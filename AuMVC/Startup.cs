@@ -41,6 +41,8 @@ namespace AuMVC
             services.AddTransient<ISiteService, SiteService>();
             services.AddTransient<IIssueService, IssueService>();
             services.AddTransient<IMaintenanceService, MaintenanceService>();
+            services.AddTransient<IProgressStageService, ProgressStageService>();
+            services.AddTransient<IVariationService, VariationService>();
             services.AddMvc();
         }
 

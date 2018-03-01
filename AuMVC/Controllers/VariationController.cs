@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AuMVC.Data;
 using AuMVC.Data.Models;
+using AuMVC.Data.Services;
 using AuMVC.Data.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,11 +13,11 @@ namespace AuMVC.Controllers
     public class VariationController : Controller
     {
 
-        private AppDbContext _context;
+        private VariationService _variationService;
 
-        public VariationController(AppDbContext context)
+        public VariationController(VariationService variationService)
         {
-            _context = context;
+            _variationService = variationService;
         }
 
 
@@ -24,9 +25,11 @@ namespace AuMVC.Controllers
         //all variations--
         public ActionResult IndexVariation()
         {
-            List<Variation> variation = _context.Variations.ToList();
+            List<Variation> variation = _variationService.allVariations();
             return View(variation);
         }
+
+
 
         // GET: Variation
         public ActionResult CreateVariation()
@@ -44,65 +47,32 @@ namespace AuMVC.Controllers
                 return View();
                 //Redirect tek nje error page
             }
-
-
-            Variation variation = new Variation()
-            {
-
-                VariationCode = viewModel.VariationCode,
-                DateReleased = DateTime.Now,
-                Contract = viewModel.Contract,
-                Location = viewModel.Location,
-                Description = viewModel.Description,
-                Comment = viewModel.Comment,
-                Price = viewModel.Price,
-                EOT = viewModel.EOT,
-                Status = viewModel.Status,
-                Claimed = viewModel.Claimed,
-                Paid = viewModel.Paid,
-                PaymentDate = DateTime.Now
-
-
-            };
-
-            _context.Variations.Add(variation);
-            _context.SaveChanges();
+            _variationService.CreateVariation(viewModel);
 
             return View();
 
         }
 
+
+
+        //editvariation
         public ActionResult EditVariation(int id)
         {
             using (AppDbContext ctx = new AppDbContext())
             {
-                Variation myVariation = ctx.Variations.Where(n => n.Id == id).FirstOrDefault();
+                Variation myVariation = _variationService.GetVariationById(id);
                 return View(myVariation);
             }
         }
 
         public ActionResult EditConfirm(Variation variation)
         {
-            Variation oldVariation = _context.Variations.Where(n => n.Id == variation.Id).FirstOrDefault();
-            oldVariation.VariationCode = variation.VariationCode;
-            oldVariation.DateReleased = variation.DateReleased;
-            oldVariation.Contract = variation.Contract;
-            oldVariation.Location = variation.Location;
-            oldVariation.Description = variation.Description;
-            oldVariation.Comment = variation.Comment;
-            oldVariation.Price = variation.Price;
-            oldVariation.EOT = variation.EOT;
-            oldVariation.Status = variation.Status;
-            oldVariation.Claimed = variation.Claimed;
-            oldVariation.Paid = variation.Paid;
-            oldVariation.PaymentDate = variation.PaymentDate;
-            //futen vlerat e tjera
 
-            //_context.Sites.AddOrUpdate(oldSite);
-            _context.SaveChanges();
-
+            _variationService.UpdateVariation(variation);
             return View();
         }
+
+
 
 
         //delete variation
@@ -112,12 +82,12 @@ namespace AuMVC.Controllers
             {
                 return RedirectToAction("IndexVariation");
             }
-            Variation myvariation = _context.Variations.Find(id);
-            if (myvariation == null)
+            
+            if (_variationService.Exists(id))
             {
                 return RedirectToAction("IndexVariation");
             }
-            return View(myvariation);
+            return View(_variationService.GetVariationById(id));
         }
 
 
@@ -127,9 +97,7 @@ namespace AuMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirm(int id)
         {
-            Variation variation = _context.Variations.Find(id);
-            _context.Variations.Remove(variation);
-            _context.SaveChanges();
+            _variationService.Delete(id);
             return RedirectToAction("IndexVariation");
         }
 
