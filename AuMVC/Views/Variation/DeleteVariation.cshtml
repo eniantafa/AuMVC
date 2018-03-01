@@ -1,0 +1,66 @@
+﻿@model AuMVC.Data.Models.Variation
+@{
+    ViewBag.Title = "DeleteVariation";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Variation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(m => m.VariationCode)
+        </dt>
+        <dd>
+            @Html.DisplayNameFor(m => m.DateReleased)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(m => m.Contract)
+        </dt>
+        <dd>
+            @Html.DisplayFor(m => m.Location)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(m => m.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(m => m.Comment)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(m => m.Price)
+        </dt>
+        <dd>
+            @Html.DisplayFor(m => m.EOT)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(m => m.Status)
+        </dt>
+        <dd>
+            @Html.DisplayFor(m => m.Claimed)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(m => m.Paid)
+        </dt>
+        <dd>
+            @Html.DisplayFor(m => m.PaymentDate)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" />
+            |
+            @Html.ActionLink("Back to List", "IndexVariation")
+        </div>
+    }
+</div>
+
+
+
+
+

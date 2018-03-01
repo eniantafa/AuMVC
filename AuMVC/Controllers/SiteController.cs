@@ -5,6 +5,7 @@ using System.Net;
 using System.Threading.Tasks;
 using AuMVC.Data;
 using AuMVC.Data.Models;
+using AuMVC.Data.Services;
 using AuMVC.Data.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,17 +13,17 @@ namespace AuMVC.Controllers
 {
     public class SiteController : Controller
     {
-        private AppDbContext _context;
+        private ISiteService _siteService;
 
-        public SiteController(AppDbContext context)
+        public SiteController(ISiteService siteService)
         {
-            _context = context;
+            _siteService = siteService;
         }
 
         // GET: All Sites
         public ActionResult Index()
         {
-            List<Site> sites = _context.Sites.ToList();
+            List<Site> sites = _siteService.allSites();
             return View(sites);
         }
 
@@ -33,67 +34,29 @@ namespace AuMVC.Controllers
 
 
         //[HttpPost]
-       
-        public ActionResult Create(SiteViewModel viewModel)
-        { 
 
-        
+        public ActionResult Create(SiteViewModel viewModel)
+        {
             if (!ModelState.IsValid)
             {
                 ModelState.AddModelError("", "Site Problem");
-
                 return View();
-                //Redirect tek nje error pge
             }
 
-            Site site = new Site()
-            {
-                SiteNumber = viewModel.SiteNumber,
-                ContractDate = DateTime.Now,
-                HomeOwner = viewModel.HomeOwner,
-                ContactNumber = viewModel.ContactNumber,
-                ContactEmail = viewModel.ContactEmail,
-                HouseType = viewModel.HouseType,
-                ContractValueExGST = viewModel.ContractValueExGST,
-                ContractValueIncGST = viewModel.ContractValueIncGST,
-                PreContactEOT = viewModel.PreContactEOT,
-                DOPCDate = DateTime.Now,
-                TwelveMonthMaintenance = DateTime.Now.AddYears(1),
-                Note = viewModel.Note
-            };
-
-            _context.Sites.Add(site);
-            _context.SaveChanges();
-
+            _siteService.CreateSite(viewModel);
             return View();
         }
 
         public ActionResult Edit(int id)
         {
-            Site mySite = _context.Sites.Where(n => n.Id == id).FirstOrDefault();
+            Site mySite = _siteService.GetSiteById(id);
             return View(mySite);
         }
 
         [ValidateAntiForgeryToken]
         public ActionResult EditConfirm(Site site)
         {
-            Site oldSite = _context.Sites.Where(n => n.Id == site.Id).FirstOrDefault();
-            oldSite.HomeOwner = site.HomeOwner;
-            oldSite.SiteNumber = site.SiteNumber;
-            oldSite.ContractDate = site.ContractDate;
-            oldSite.ContactNumber = site.ContactNumber;
-            oldSite.ContactEmail = site.ContactEmail;
-            oldSite.HouseType = site.HouseType;
-            oldSite.ContractValueExGST = site.ContractValueExGST;
-            oldSite.ContractValueIncGST = site.ContractValueIncGST;
-            oldSite.PreContactEOT = site.PreContactEOT;
-            oldSite.DOPCDate = site.DOPCDate;
-            oldSite.TwelveMonthMaintenance = site.TwelveMonthMaintenance;
-            oldSite.Note = site.Note;
-
-            //_context.Sites.AddOrUpdate(oldSite);
-            _context.SaveChanges();
-
+            _siteService.UpdateSite(site);
             return View();
         }
 
@@ -103,24 +66,21 @@ namespace AuMVC.Controllers
             {
                 return RedirectToAction("Index");
             }
-            Site mysite = _context.Sites.Find(id);
-            if ( mysite == null)
+            if (_siteService.Exists(id))
             {
                 return RedirectToAction("Index");
             }
-            return View(mysite);
+            return View(_siteService.GetSiteById(id));
         }
 
-      
+
 
         // POST: Site/Delete
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirm(int id)
         {
-            Site site = _context.Sites.Find(id);
-            _context.Sites.Remove(site);
-            _context.SaveChanges();
+            _siteService.Delete(id);
             return RedirectToAction("Index");
         }
     }

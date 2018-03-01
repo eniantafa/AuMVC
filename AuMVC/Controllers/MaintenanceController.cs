@@ -87,5 +87,34 @@ namespace AuMVC.Controllers
 
             return View();
         }
+
+
+        //delete maintenance
+        public ActionResult DeleteMaintenance(int id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("Index");
+            }
+            Maintenance myMaintenance = _context.Maintenances.Find(id);
+            if (myMaintenance == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(myMaintenance);
+        }
+
+
+
+        // POST: Maintenance/Delete
+        [HttpPost, ActionName("DeleteMaintenance")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirm(int id)
+        {
+            Maintenance maintenance = _context.Maintenances.Find(id);
+            _context.Maintenances.Remove(maintenance);
+            _context.SaveChanges();
+            return RedirectToAction("IndexMaintenance");
+        }
     }
 }

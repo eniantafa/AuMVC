@@ -6,11 +6,8 @@
 }
 
 
-@foreach (Maintenance maintenance in Model)
-{
-
-    @Html.ActionLink("Add New", "CreateMaintenance", "Maintenance", new { @id = maintenance.Id })
-}
+<button type="button" class="btn btn-default">
+@Html.ActionLink("Add New", "CreateMaintenance", "Maintenance", new { @id = Model.Select(m => m.Id) }) </button>
 
 @if (Model.Any())
 

@@ -93,5 +93,34 @@ namespace AuMVC.Controllers
 
             return View();
         }
+
+        //delete progstage
+        public ActionResult DeleteProgressStage(int id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("IndexProgressStage");
+            }
+            ProgressStage myprogressStage = _context.ProgressStages.Find(id);
+            if (myprogressStage == null)
+            {
+                return RedirectToAction("IndexProgressStage");
+            }
+            return View(myprogressStage);
+        }
+
+
+
+        // POST: Progstage/Delete
+        [HttpPost, ActionName("DeleteProgressStage")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirm(int id)
+        {
+            ProgressStage progressStage = _context.ProgressStages.Find(id);
+            _context.ProgressStages.Remove(progressStage);
+            _context.SaveChanges();
+            return RedirectToAction("IndexProgressStage");
+        }
+
     }
 }

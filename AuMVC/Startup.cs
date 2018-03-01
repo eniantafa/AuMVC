@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AuMVC.Data;
+using AuMVC.Data.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -35,7 +36,7 @@ namespace AuMVC
             //Konfigurimi i servisit db server
             services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
+            services.AddTransient<ISiteService, SiteService>();
             services.AddMvc();
         }
 
@@ -44,6 +45,7 @@ namespace AuMVC
         {
             if (env.IsDevelopment())
             {
+                
                 app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
             }

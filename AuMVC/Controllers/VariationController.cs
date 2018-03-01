@@ -103,6 +103,36 @@ namespace AuMVC.Controllers
 
             return View();
         }
+
+
+        //delete variation
+        public ActionResult DeleteVariation(int id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("IndexVariation");
+            }
+            Variation myvariation = _context.Variations.Find(id);
+            if (myvariation == null)
+            {
+                return RedirectToAction("IndexVariation");
+            }
+            return View(myvariation);
+        }
+
+
+
+        // POST: variation/Delete
+        [HttpPost, ActionName("DeleteVariation")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirm(int id)
+        {
+            Variation variation = _context.Variations.Find(id);
+            _context.Variations.Remove(variation);
+            _context.SaveChanges();
+            return RedirectToAction("IndexVariation");
+        }
+
     }
 }
-
+    

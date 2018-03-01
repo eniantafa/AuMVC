@@ -32,7 +32,7 @@ namespace AuMVC.Controllers
             return View(new IssueViewModel());
         }
 
-        [HttpPost]
+
         public ActionResult CreateIssue(IssueViewModel viewModel)
         {
             if (!ModelState.IsValid)
@@ -61,5 +61,65 @@ namespace AuMVC.Controllers
 
             return View();
         }
+
+
+        //edit issue
+
+        public ActionResult EditIssue(int id)
+        {
+            Issue myIssue = _context.Issues.Where(n => n.Id == id).FirstOrDefault();
+            return View(myIssue);
+        }
+
+        [ValidateAntiForgeryToken]
+        public ActionResult EditConfirm(Issue issue)
+        {
+            Issue oldIssue = _context.Issues.Where(n => n.Id == issue.Id).FirstOrDefault();
+            oldIssue.Code = issue.Code;
+            oldIssue.Date = issue.Date;
+            oldIssue.Category = issue.Category;
+            oldIssue.Item = issue.Item;
+            oldIssue.Priority = issue.Priority;
+            oldIssue.Status = issue.Status;
+            oldIssue.Note = issue.Note;
+
+
+            //_context.Sites.AddOrUpdate(oldIssue);
+            _context.SaveChanges();
+
+            return View();
+
+
+            //deleteissue
+
+             ActionResult DeleteIssue(int id)
+            {
+                if (id == null)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                Issue myIssue = _context.Issues.Find(id);
+                if (myIssue == null)
+                {
+                    return RedirectToAction("Index");
+                }
+                return View(myIssue);
+            }
+        }
+
+
+
+// POST: Issue/Delete
+        [HttpPost, ActionName("DeleteIssue")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmIssue(int id)
+        {
+            Site site = _context.Sites.Find(id);
+            _context.Sites.Remove(site);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }
+

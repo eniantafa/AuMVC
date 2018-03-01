@@ -6,11 +6,9 @@
 }
 
 
-@foreach (Site site in Model)
-{
 
-    @Html.ActionLink("Add New", "Create", "Site", new { @id = site.Id })
-}
+<button type="button" class="btn btn-default" > @Html.ActionLink("Add New", "Create", "Site", new { @id = Model.Select(m => m.Id) }) </button>
+
 
 
 
@@ -48,8 +46,8 @@
                     <td>@site.DOPCDate</td>
                     <td>@site.TwelveMonthMaintenance</td>
                     <td>@site.Note</td>
-                    <td>@Html.ActionLink("Edit", "Edit", "Site", new { @id = site.Id })</td>
-                    <td>@Html.ActionLink("Delete", "Delete", "Site", new { @id = site.Id })</td>
+                    <td type="button" class="btn btn-default ">@Html.ActionLink("Edit", "Edit", "Site", new { @id = site.Id })</td>
+                    <td type="button" class="btn btn-default ">@Html.ActionLink("Delete", "Delete", "Site", new { @id = site.Id })</td>
                 </tr>
             }
         </tbody>
