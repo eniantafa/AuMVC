@@ -35,7 +35,8 @@ namespace AuMVC.Data.Services
                 Item = viewModel.Item,
                 Priority = viewModel.Priority,
                 Status = viewModel.Status,
-                Note = viewModel.Note
+                Note = viewModel.Note,
+                SiteId = viewModel.SiteId
 
             };
 

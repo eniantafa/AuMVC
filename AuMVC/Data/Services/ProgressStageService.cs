@@ -37,7 +37,8 @@ namespace AuMVC.Data.Services
                 DateApproved = DateTime.Now.AddMonths(3),
                 ApprovedBy = viewModel.ApprovedBy,
                 PaymentStatus = viewModel.PaymentStatus,
-                DatePaid = DateTime.Now
+                DatePaid = DateTime.Now,
+                SiteId = viewModel.SiteId
 
             };
 

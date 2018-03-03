@@ -39,8 +39,9 @@ namespace AuMVC.Data.Services
                 Status = viewModel.Status,
                 Claimed = viewModel.Claimed,
                 Paid = viewModel.Paid,
-                PaymentDate = DateTime.Now
-
+                PaymentDate = DateTime.Now,
+                SiteId= viewModel.SiteId
+                
 
             };
 

@@ -14,10 +14,13 @@ namespace AuMVC.Controllers
     {
 
         private IProgressStageService _progressStageService;
+        private ISiteService _siteService;
 
-        public ProgressStageController(IProgressStageService progressStageService)
+        public ProgressStageController(IProgressStageService progressStageService, ISiteService siteService)
         {
             _progressStageService = progressStageService;
+            _siteService = siteService;
+
         }
 
 
@@ -36,7 +39,12 @@ namespace AuMVC.Controllers
         // GET: ProgressStage
         public ActionResult CreateProgressStage()
         {
-            return View(new ProgressStageViewModel());
+            IssueViewModel issueVM = new IssueViewModel()
+            {
+                Sites = _siteService.allSites()
+            };
+
+            return View(issueVM);
         }
 
 

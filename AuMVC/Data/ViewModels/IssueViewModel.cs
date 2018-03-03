@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using AuMVC.Data.Models;
+using Microsoft.AspNetCore.Mvc.Razor.Internal;
 
 namespace AuMVC.Data.ViewModels
 {
@@ -27,4 +28,6 @@ namespace AuMVC.Data.ViewModels
         public List<Site> Sites { get; set; }
 
     }
+
+    
 }

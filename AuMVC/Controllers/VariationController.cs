@@ -14,10 +14,12 @@ namespace AuMVC.Controllers
     {
 
         private IVariationService _variationService;
+        private ISiteService _siteService;
 
-        public VariationController(IVariationService variationService)
+        public VariationController(IVariationService variationService, ISiteService siteService)
         {
             _variationService = variationService;
+            _siteService = siteService;
         }
 
 
@@ -34,7 +36,12 @@ namespace AuMVC.Controllers
         // GET: Variation
         public ActionResult CreateVariation()
         {
-            return View(new VariationViewModel());
+            VariationViewModel variatonVM = new VariationViewModel()
+            {
+                Sites = _siteService.allSites()
+            };
+
+            return View(variatonVM);
         }
 
         [HttpPost]

@@ -34,8 +34,8 @@
                     <td>@issue.Priority</td>
                     <td>@issue.Status</td>
                     <td>@issue.Note</td>
-                    <td>@Html.ActionLink("Edit this Issue", "EditIssue", "Issue", new { @id = issue.Id })</td>
-                    <td>@Html.ActionLink("Create a Issue", "CreateIssue", "Issue", new { @id = issue.Id })</td>
+                    <td>@Html.ActionLink("Edit", "EditIssue", "Issue", new { @id = issue.Id })</td>
+                    <td>@Html.ActionLink("Delete", "DeleteIssue", "Issue", new { @id = issue.Id })</td>
                 </tr>
             }
         </tbody>

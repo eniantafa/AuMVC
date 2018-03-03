@@ -36,6 +36,7 @@ namespace AuMVC.Controllers
 
 
         // GET: Issue
+        
         public ActionResult CreateIssue()
         {
             IssueViewModel issueVM = new IssueViewModel()

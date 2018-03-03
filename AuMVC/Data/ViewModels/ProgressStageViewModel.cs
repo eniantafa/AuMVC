@@ -1,4 +1,5 @@
 ﻿using AuMVC.Data.Enums;
+using AuMVC.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,5 +17,9 @@ namespace AuMVC.Data.ViewModels
         public string ApprovedBy { get; set; }
         public ProgressStagePaymentStatus PaymentStatus { get; set; }
         public DateTime DatePaid { get; set; }
+        
+        //site dropdown
+        public int SiteId { get; set; }
+        public List<Site> Sites { get; set; }
     }
 }

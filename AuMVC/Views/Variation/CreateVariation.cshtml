@@ -12,8 +12,16 @@
     <p class="alert alert-info"> All fields are <strong>Required</strong></p>
 
     <div class="form-group">
+        <label>Site Number</label>
+        @Html.DropDownListFor(m => m.SiteId, new SelectList(Model.Sites.Select(x => new { Value = x.Id, Text = x.SiteNumber }), "Value", "Text"),
+                                  "Select a site",
+                                  htmlAttributes: new { @class = "form-control border-input" })
+        @Html.ValidationMessageFor(model => model.SiteId, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
         @Html.LabelFor(m => m.VariationCode)
-        @Html.TextBoxFor(m => m.VariationCode, new { @class = "form-control" ,autofocus="autofocus",palceholder="Enter Your Variation Code"})
+        @Html.TextBoxFor(m => m.VariationCode, new { @class = "form-control", autofocus = "autofocus", palceholder = "Enter Your Variation Code" })
         @Html.ValidationMessageFor(m => m.VariationCode, "", new { @class = "text-danger" })
     </div>
 
@@ -26,13 +34,13 @@
     <div class="form-group">
         @Html.LabelFor(m => m.Contract)
         @Html.DropDownList("VariationContract",
-           Html.GetEnumSelectList<VariationContract>(),
-           "VariationContract", new { @class = "form-control" })
+                Html.GetEnumSelectList<VariationContract>(),
+                "VariationContract", new { @class = "form-control" })
     </div>
 
     <div class="form-group">
         @Html.LabelFor(m => m.Location)
-        @Html.TextBoxFor(m => m.Location, new { @class = "form-control", placeholder="ex. Albania" })
+        @Html.TextBoxFor(m => m.Location, new { @class = "form-control", placeholder = "ex. Albania" })
         @Html.ValidationMessageFor(m => m.Location, "", new { @class = "text-danger" })
 
     </div>
@@ -64,8 +72,8 @@
     <div class="form-group">
         @Html.LabelFor(m => m.Status)
         @Html.DropDownList("VariationStatus",
-            Html.GetEnumSelectList<VariationStatus>(),
-            "VariationStatus", new { @class = "form-control" })
+                 Html.GetEnumSelectList<VariationStatus>(),
+                 "VariationStatus", new { @class = "form-control" })
     </div>
 
     <div class="form-group">
@@ -83,7 +91,7 @@
     <div class="form-group">
         @Html.LabelFor(m => m.PaymentDate)
         @Html.TextBoxFor(m => m.PaymentDate, new { @class = "form-control", @type = "date" })
-       
+
     </div>
 
 
