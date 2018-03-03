@@ -14,11 +14,12 @@ namespace AuMVC.Controllers
     {
 
 
-        private MaintenanceService _maintenanceService;
-
-        public MaintenanceController(MaintenanceService maintenanceService)
+        private IMaintenanceService _maintenanceService;
+        private ISiteService _siteService;
+        public MaintenanceController(IMaintenanceService maintenanceService, ISiteService siteService)
         {
             _maintenanceService = maintenanceService;
+            _siteService = siteService;
         }
 
 
@@ -38,7 +39,11 @@ namespace AuMVC.Controllers
         // GET: Maintenance
         public ActionResult CreateMaintenance()
         {
-            return View(new MaintenanceViewModel());
+            MaintenanceViewModel maintenanceVM = new MaintenanceViewModel()
+            {
+                Sites = _siteService.allSites()
+            };
+            return View(maintenanceVM);
         }
 
         [HttpPost]

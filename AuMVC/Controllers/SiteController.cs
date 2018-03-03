@@ -66,7 +66,7 @@ namespace AuMVC.Controllers
             {
                 return RedirectToAction("Index");
             }
-            if (_siteService.Exists(id))
+            if (!_siteService.Exists(id))
             {
                 return RedirectToAction("Index");
             }

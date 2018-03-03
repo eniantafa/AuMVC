@@ -13,9 +13,9 @@ namespace AuMVC.Controllers
     public class VariationController : Controller
     {
 
-        private VariationService _variationService;
+        private IVariationService _variationService;
 
-        public VariationController(VariationService variationService)
+        public VariationController(IVariationService variationService)
         {
             _variationService = variationService;
         }

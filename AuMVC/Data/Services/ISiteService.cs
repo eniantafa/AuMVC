@@ -10,10 +10,12 @@ namespace AuMVC.Data.Services
     public interface ISiteService
     {
         List<Site> allSites();
-        void Delete(int siteId);
-        bool Exists(int siteId);
+        void CreateSite(SiteViewModel viewModel);
         Site GetSiteById(int siteId);
         void UpdateSite(Site newSite);
-        void CreateSite(SiteViewModel viewModel);
+        bool Exists(int siteId);
+        void Delete(int siteId);
+        
+
     }
 }

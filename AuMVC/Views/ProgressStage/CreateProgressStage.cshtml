@@ -9,7 +9,7 @@
 
 @using (Html.BeginForm("CreateProgressStage", "ProgressStage", FormMethod.Post))
 {
-
+    <p class="alert alert-info"> All fields are <strong>Required</strong></p>
 
     <form>
 
@@ -17,50 +17,58 @@
             @Html.LabelFor(m => m.Stage)
 
             @Html.DropDownList("ProgressStageStage",
-      Html.GetEnumSelectList<ProgressStageStage>(),
-      "ProgressStageStage", new { @class = "form-control" })
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.Value)
-                @Html.TextBoxFor(m => m.Value, new { @class = "form-control" })
-            </div>
+        Html.GetEnumSelectList<ProgressStageStage>(),
+        "ProgressStageStage", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Stage, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Value)
+            @Html.TextBoxFor(m => m.Value, new { @class = "form-control",placeholder="Enter the Value" })
+            @Html.ValidationMessageFor(m => m.Value, "", new { @class = "text-danger" })
+        </div>
 
-            <div class="form-group">
-                @Html.LabelFor(m => m.DateCompleted)
-                @Html.TextBoxFor(m => m.DateCompleted, new { @class = "form-control", @type = "date" })
-            </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.DateCompleted)
+            @Html.TextBoxFor(m => m.DateCompleted, new { @class = "form-control", @type = "date" })
+            @Html.ValidationMessageFor(m => m.DateCompleted, "", new { @class = "text-danger" })
+           
+        </div>
 
-            <div class="form-group">
-                @Html.LabelFor(m => m.CompletedBy)
-                @Html.TextBoxFor(m => m.CompletedBy, new { @class = "form-control" })
-            </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.CompletedBy)
+            @Html.TextBoxFor(m => m.CompletedBy, new { @class = "form-control",placeholder="Name/Surname" })
+            @Html.ValidationMessageFor(m => m.CompletedBy, "", new { @class = "text-danger" })
+        </div>
 
-            <div class="form-group">
-                @Html.LabelFor(m => m.DateApproved)
-                @Html.TextBoxFor(m => m.DateApproved, new { @class = "form-control", @type = "date" })
-            </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.DateApproved)
+            @Html.TextBoxFor(m => m.DateApproved, new { @class = "form-control", @type = "date" })
+            @Html.ValidationMessageFor(m => m.DateApproved, "", new { @class = "text-danger" })
+        </div>
 
-            <div class="form-group">
-                @Html.LabelFor(m => m.ApprovedBy)
-                @Html.TextBoxFor(m => m.ApprovedBy, new { @class = "form-control" })
-            </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.ApprovedBy)
+            @Html.TextBoxFor(m => m.ApprovedBy, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.ApprovedBy, "", new { @class = "text-danger" })
+        </div>
 
-            <div class="form-group">
-                @Html.LabelFor(m => m.PaymentStatus)
+        <div class="form-group">
+            @Html.LabelFor(m => m.PaymentStatus)
 
-                @Html.DropDownList("ProgressStagePaymentStatus",
-          Html.GetEnumSelectList<ProgressStagePaymentStatus>(),
-          "ProgressStagePaymentStatus", new { @class = "form-control" })
-            </div>
-
-
-            <div class="form-group">
-                @Html.LabelFor(m => m.DatePaid)
-                @Html.TextBoxFor(m => m.DatePaid, new { @class = "form-control", @type = "date" })
-            </div>
+            @Html.DropDownList("ProgressStagePaymentStatus",
+        Html.GetEnumSelectList<ProgressStagePaymentStatus>(),
+        "ProgressStagePaymentStatus", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.PaymentStatus, "", new { @class = "text-danger" })
+        </div>
 
 
-            <button type="button" class="btn btn-primary">Save</button>
-</form>
+        <div class="form-group">
+            @Html.LabelFor(m => m.DatePaid)
+            @Html.TextBoxFor(m => m.DatePaid, new { @class = "form-control", @type = "date" })
+        </div>
+
+
+        <button type="button" class="btn btn-primary">Save</button>
+    </form>
 
 }

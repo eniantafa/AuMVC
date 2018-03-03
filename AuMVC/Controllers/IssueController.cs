@@ -12,18 +12,14 @@ namespace AuMVC.Controllers
 {
     public class IssueController : Controller
     {
+        private IIssueService _issueService;
+        private ISiteService _siteService;
 
-
-
-        private IssueService _issueService;
-
-        public IssueController(IssueService issueService)
+        public IssueController(IIssueService issueService, ISiteService siteService)
         {
             _issueService = issueService;
+            _siteService = siteService;
         }
-
-
-
 
 
         //all issues--
@@ -42,10 +38,15 @@ namespace AuMVC.Controllers
         // GET: Issue
         public ActionResult CreateIssue()
         {
-            return View(new IssueViewModel());
+            IssueViewModel issueVM = new IssueViewModel()
+            {
+                Sites = _siteService.allSites()
+            };
+
+            return View(issueVM);
         }
 
-
+        [HttpPost]
         public ActionResult CreateIssue(IssueViewModel viewModel)
         {
             if (!ModelState.IsValid)
@@ -61,7 +62,7 @@ namespace AuMVC.Controllers
 
             return View();
         }
-    
+
 
 
 
@@ -87,25 +88,25 @@ namespace AuMVC.Controllers
 
 
 
-            //deleteissue
+        //deleteissue
 
-             ActionResult DeleteIssue(int id)
+        ActionResult DeleteIssue(int id)
+        {
+            if (id == null)
             {
-                if (id == null)
-                {
-                    return RedirectToAction("Index");
-                }
-
-                
-                if (_issueService.Exists(id))
-                {
-                    return RedirectToAction("Index");
-                }
-                return View(_issueService.GetIssueById(id));
+                return RedirectToAction("Index");
             }
-        
 
-// POST: Issue/Delete
+
+            if (_issueService.Exists(id))
+            {
+                return RedirectToAction("Index");
+            }
+            return View(_issueService.GetIssueById(id));
+        }
+
+
+        // POST: Issue/Delete
         [HttpPost, ActionName("DeleteIssue")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmIssue(int id)
@@ -115,4 +116,5 @@ namespace AuMVC.Controllers
         }
     }
 }
+
 

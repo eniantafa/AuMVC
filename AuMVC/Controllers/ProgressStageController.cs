@@ -13,9 +13,9 @@ namespace AuMVC.Controllers
     public class ProgressStageController : Controller
     {
 
-        private ProgressStageService _progressStageService;
+        private IProgressStageService _progressStageService;
 
-        public ProgressStageController(ProgressStageService progressStageService)
+        public ProgressStageController(IProgressStageService progressStageService)
         {
             _progressStageService = progressStageService;
         }
