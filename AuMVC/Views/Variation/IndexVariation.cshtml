@@ -2,7 +2,7 @@
 @model List<Variation>
 
 @{
-    ViewData["Title"] = "IndexVariation";
+    ViewData["Title"] = "Variation";
 }
 
 
@@ -49,8 +49,8 @@
                     <td>@variation.Claimed</td>
                     <td>@variation.Paid</td>
                     <td>@variation.PaymentDate</td>
-                    <td>@Html.ActionLink("Edit this Variation", "EditVariation", "Variation", new { @id = variation.Id })</td>
-                    <td>@Html.ActionLink("Create a Variation", "CreateVariation", "Variation", new { @id = variation.Id })</td>
+                    <td type="buttton" class="btn btn-default">@Html.ActionLink("Edit", "EditVariation", "Variation", new { @id = variation.Id })</td>
+                    <td type="buttton" class="btn btn-default">@Html.ActionLink("Delete", "DeleteVariation", "Variation", new { @id = variation.Id })</td>
                 </tr>
             }
         </tbody>

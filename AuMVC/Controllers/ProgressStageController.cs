@@ -80,7 +80,7 @@ namespace AuMVC.Controllers
 
         }
 
-        [ValidateAntiForgeryToken]
+       
         public ActionResult EditConfirm(ProgressStage progressStage)
         {
             _progressStageService.UpdateProgressStage(progressStage);
@@ -115,7 +115,7 @@ namespace AuMVC.Controllers
         // POST: Progstage/Delete
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirm(int id)
+        public ActionResult DeleteConfirmProgressStage(int id)
         {
              _progressStageService.Delete(id);
             return RedirectToAction("IndexProgressStage");

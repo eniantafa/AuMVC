@@ -38,8 +38,8 @@
                     <td>@progressStage.PaymentStatus</td>
                     <td>@progressStage.DatePaid</td>
 
-                    <td type="button" class="btn btn-default">@Html.ActionLink("Edit this Progress Stage", "EditProgressStage", "ProgressStage", new { @id = progressStage.Id })</td>
-                    <td type="button" class="btn btn-default">@Html.ActionLink("Create a Progress Stage", "CreateProgressStage", "ProgressStage", new { @id = progressStage.Id })</td>
+                    <td type="button" class="btn btn-default">@Html.ActionLink("Edit", "EditProgressStage", "ProgressStage", new { @id = progressStage.Id })</td>
+                    <td type="button" class="btn btn-default">@Html.ActionLink("Delete", "DeleteProgressStage", "ProgressStage", new { @id = progressStage.Id })</td>
                 </tr>
             }
         </tbody>
@@ -50,7 +50,7 @@
 
 else
 {
-    <h1 class="text-center text-danger">There are no ProgressStage yet!</h1>
+    <h1 class="text-center text-danger">There are no Progress Stage yet!</h1>
 
 }
 

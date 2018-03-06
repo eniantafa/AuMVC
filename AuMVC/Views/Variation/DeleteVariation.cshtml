@@ -1,6 +1,6 @@
 ﻿@model AuMVC.Data.Models.Variation
 @{
-    ViewBag.Title = "DeleteVariation";
+    ViewBag.Title = "Delete Variation";
 }
 
 <h2>Delete</h2>
@@ -49,8 +49,10 @@
 
     </dl>
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("DeleteConfirmVariation", "Variation", FormMethod.Post))
     {
+
+        @Html.HiddenFor(n => n.Id);
         @Html.AntiForgeryToken()
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" />

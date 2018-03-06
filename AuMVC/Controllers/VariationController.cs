@@ -56,7 +56,7 @@ namespace AuMVC.Controllers
             }
             _variationService.CreateVariation(viewModel);
 
-            return View();
+            return View(new VariationViewModel() { Sites = _siteService.allSites() });
 
         }
 
@@ -65,11 +65,10 @@ namespace AuMVC.Controllers
         //editvariation
         public ActionResult EditVariation(int id)
         {
-            using (AppDbContext ctx = new AppDbContext())
-            {
+            
                 Variation myVariation = _variationService.GetVariationById(id);
                 return View(myVariation);
-            }
+            
         }
 
         public ActionResult EditConfirm(Variation variation)
@@ -90,7 +89,7 @@ namespace AuMVC.Controllers
                 return RedirectToAction("IndexVariation");
             }
             
-            if (_variationService.Exists(id))
+            if (!_variationService.Exists(id))
             {
                 return RedirectToAction("IndexVariation");
             }
@@ -100,9 +99,9 @@ namespace AuMVC.Controllers
 
 
         // POST: variation/Delete
-        [HttpPost, ActionName("DeleteVariation")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirm(int id)
+        public ActionResult DeleteConfirmVariation(int id)
         {
             _variationService.Delete(id);
             return RedirectToAction("IndexVariation");

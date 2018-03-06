@@ -1,10 +1,10 @@
 ﻿@using AuMVC.Data.Enums;
 @model AuMVC.Data.ViewModels.VariationViewModel
 @{
-    ViewBag.Title = "CreateVariation";
+    ViewBag.Title = "Create Variation";
 }
 
-<h2>CreateVariation</h2>
+<h2>Create Variation</h2>
 
 
 @using (Html.BeginForm("CreateVariation", "Variation", FormMethod.Post))
@@ -33,9 +33,10 @@
 
     <div class="form-group">
         @Html.LabelFor(m => m.Contract)
-        @Html.DropDownList("VariationContract",
-                Html.GetEnumSelectList<VariationContract>(),
-                "VariationContract", new { @class = "form-control" })
+        @Html.DropDownListFor(model => model.Contract,
+                 Html.GetEnumSelectList<VariationContract>(),
+                 "VariationContract", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Contract, "", new { @class = "text-danger" })
     </div>
 
     <div class="form-group">
@@ -71,9 +72,10 @@
 
     <div class="form-group">
         @Html.LabelFor(m => m.Status)
-        @Html.DropDownList("VariationStatus",
-                 Html.GetEnumSelectList<VariationStatus>(),
-                 "VariationStatus", new { @class = "form-control" })
+        @Html.DropDownListFor(model => model.Status,
+                  Html.GetEnumSelectList<VariationStatus>(),
+                  "VariationStatus", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Status, "", new { @class = "text-danger" })
     </div>
 
     <div class="form-group">
@@ -91,6 +93,7 @@
     <div class="form-group">
         @Html.LabelFor(m => m.PaymentDate)
         @Html.TextBoxFor(m => m.PaymentDate, new { @class = "form-control", @type = "date" })
+        @Html.ValidationMessageFor(m => m.PaymentDate, "", new { @class = "text-danger" })
 
     </div>
 
