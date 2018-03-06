@@ -1,6 +1,6 @@
 ﻿@model AuMVC.Data.Models.ProgressStage
 @{
-    ViewBag.Title = "DeleteProgressStage";
+    ViewBag.Title = "Delete Progress Stage";
 }
 
 <h2>Delete</h2>
@@ -34,8 +34,11 @@
 
     </dl>
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("DeleteConfirmProgressStage", "ProgressStage", FormMethod.Post))
     {
+
+        @Html.HiddenFor(n => n.Id);
+
         @Html.AntiForgeryToken()
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" />

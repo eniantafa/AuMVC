@@ -59,7 +59,7 @@ namespace AuMVC.Controllers
             
 
             _maintenanceService.CreateMaintenance(viewModel);
-            return View();
+            return View(new MaintenanceViewModel() { Sites = _siteService.allSites() });
         }
 
 
@@ -94,7 +94,7 @@ namespace AuMVC.Controllers
                 return RedirectToAction("Index");
             }
             
-            if (_maintenanceService.Exists(id))
+            if (!_maintenanceService.Exists(id))
             {
                 return RedirectToAction("Index");
             }
@@ -104,9 +104,9 @@ namespace AuMVC.Controllers
 
 
         // POST: Maintenance/Delete
-        [HttpPost, ActionName("DeleteMaintenance")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirm(int id)
+        public ActionResult DeleteConfirmMaintenance(int id)
         {
             _maintenanceService.Delete(id);
             return RedirectToAction("IndexMaintenance");

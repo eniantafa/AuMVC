@@ -39,12 +39,12 @@ namespace AuMVC.Controllers
         // GET: ProgressStage
         public ActionResult CreateProgressStage()
         {
-            IssueViewModel issueVM = new IssueViewModel()
+            ProgressStageViewModel progressStageVM = new ProgressStageViewModel()
             {
                 Sites = _siteService.allSites()
             };
 
-            return View(issueVM);
+            return View(progressStageVM);
         }
 
 
@@ -63,7 +63,7 @@ namespace AuMVC.Controllers
 
             _progressStageService.CreateProgressStage(viewModel);
 
-            return View();
+            return View(new ProgressStageViewModel() { Sites = _siteService.allSites() });
         }
 
 
@@ -103,17 +103,17 @@ namespace AuMVC.Controllers
                 return RedirectToAction("IndexProgressStage");
             }
 
-            if (_progressStageService.Exists(id))
+            if (!_progressStageService.Exists(id))
             {
                 return RedirectToAction("IndexProgressStage");
             }
-            return View(_progressStageService.GetProgressStageById(id));
+             return View(_progressStageService.GetProgressStageById(id));
         }
 
 
 
         // POST: Progstage/Delete
-        [HttpPost, ActionName("DeleteProgressStage")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirm(int id)
         {

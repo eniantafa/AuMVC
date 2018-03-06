@@ -2,7 +2,7 @@
 @model List<Maintenance>
 
 @{
-    ViewData["Title"] = "IndexMaintenance";
+    ViewData["Title"] = "Maintenances";
 }
 
 
@@ -13,7 +13,7 @@
 
 {
 
-    <table class="table table-bordered table-hover">
+    <table class="table table-striped">
         <thead>
             <tr class="info">
                 <td>Issue Code</td>
@@ -39,8 +39,8 @@
                     <td>@maintenance.Priority</td>
                     <td>@maintenance.Status</td>
                     <td>@maintenance.Note</td>
-                    <td>@Html.ActionLink("Edit this Maintenance", "EditMaintenance", "Maintenance", new { @id = maintenance.Id })</td>
-                    <td>@Html.ActionLink("Create a Maintenance", "CreateMaintenance", "Maintenance", new { @id = maintenance.Id })</td>
+                    <td type="button" class="btn btn-default">@Html.ActionLink("Edit", "EditMaintenance", "Maintenance", new { @id = maintenance.Id })</td>
+                    <td type="button" class="btn btn-default">@Html.ActionLink("Delete", "DeleteMaintenance", "Maintenance", new { @id = maintenance.Id })</td>
                 </tr>
             }
         </tbody>

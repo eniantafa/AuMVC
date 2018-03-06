@@ -1,7 +1,7 @@
 ﻿@using AuMVC.Data.Enums;
 @model AuMVC.Data.ViewModels.ProgressStageViewModel
 @{
-    ViewBag.Title = "CreateProgressStage";
+    ViewBag.Title = "Create Progress Stage";
 }
 
 <h2>CreateProgressStage</h2>
@@ -15,14 +15,14 @@
         <div class="form-group">
             <label>Site Number</label>
             @Html.DropDownListFor(m => m.SiteId, new SelectList(Model.Sites.Select(x => new { Value = x.Id, Text = x.SiteNumber }), "Value", "Text"),
-                                  "Select a site",
-                                  htmlAttributes: new { @class = "form-control border-input" })
+                             "Select a site",
+                             htmlAttributes: new { @class = "form-control border-input" })
             @Html.ValidationMessageFor(model => model.SiteId, "", new { @class = "text-danger" })
         </div>
         <div class="form-group">
             @Html.LabelFor(m => m.Stage)
 
-            @Html.DropDownList("ProgressStageStage",
+            @Html.DropDownListFor(model=>model.Stage,
          Html.GetEnumSelectList<ProgressStageStage>(),
          "ProgressStageStage", new { @class = "form-control" })
             @Html.ValidationMessageFor(m => m.Stage, "", new { @class = "text-danger" })
@@ -61,7 +61,7 @@
         <div class="form-group">
             @Html.LabelFor(m => m.PaymentStatus)
 
-            @Html.DropDownList("ProgressStagePaymentStatus",
+            @Html.DropDownListFor(model=>model.PaymentStatus,
          Html.GetEnumSelectList<ProgressStagePaymentStatus>(),
          "ProgressStagePaymentStatus", new { @class = "form-control" })
             @Html.ValidationMessageFor(m => m.PaymentStatus, "", new { @class = "text-danger" })
@@ -71,10 +71,11 @@
         <div class="form-group">
             @Html.LabelFor(m => m.DatePaid)
             @Html.TextBoxFor(m => m.DatePaid, new { @class = "form-control", @type = "date" })
+            @Html.ValidationMessageFor(m => m.DatePaid, "", new { @class = "text-danger" })
         </div>
 
 
-        <button type="button" class="btn btn-primary">Save</button>
+        <button type="submit" class="btn btn-primary">Save</button>
     </form>
 
 }

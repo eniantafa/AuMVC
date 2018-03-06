@@ -47,7 +47,7 @@
         <div class="form-group">
             @Html.LabelFor(m => m.Category)
 
-            @Html.DropDownList("IssueCategory",
+            @Html.DropDownListFor(model=>model.Category,
               Html.GetEnumSelectList<IssueCategory>(),
               "Issue Category", new { @class = "form-control" })
             @Html.ValidationMessageFor(m => m.Category, "", new { @class = "text-danger" })
@@ -56,8 +56,7 @@
 
         <div class="form-group">
             @Html.LabelFor(m => m.Status)
-            @Html.DropDownList("IssueStatus",
-            Html.GetEnumSelectList<IssueStatus>(),
+            @Html.DropDownListFor(model=> model.Status, Html.GetEnumSelectList<IssueStatus>(),
            "Issue Status", new { @class = "form-control" })
             @Html.ValidationMessageFor(m => m.Status, "", new { @class = "text-danger" })
         </div>
@@ -70,9 +69,10 @@
         </div>
         
         <div class="form-group">
-            @Html.DropDownList("IssuePriority",
-             Html.GetEnumSelectList<IssuePriority>(),
-             "Issue Gender", new { @class = "form-control" })
+            @Html.LabelFor(m => m.Priority)
+            @Html.DropDownListFor(model => model.Priority,
+          Html.GetEnumSelectList<IssuePriority>(),
+          "Issue Priority", new { @class = "form-control" })
             @Html.ValidationMessageFor(m => m.Priority, "", new { @class = "text-danger" })
         </div>
         

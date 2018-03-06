@@ -36,7 +36,7 @@ namespace AuMVC.Controllers
 
 
         // GET: Issue
-        
+
         public ActionResult CreateIssue()
         {
             IssueViewModel issueVM = new IssueViewModel()
@@ -61,7 +61,7 @@ namespace AuMVC.Controllers
 
             _issueService.CreateIssue(viewModel);
 
-            return View();
+            return View(new IssueViewModel(){ Sites = _siteService.allSites() });
         }
 
 
@@ -79,7 +79,7 @@ namespace AuMVC.Controllers
             return View(myIssue);
         }
 
-        [ValidateAntiForgeryToken]
+        
         public ActionResult EditConfirm(Issue issue)
         {
             _issueService.UpdateIssue(issue);
@@ -91,7 +91,7 @@ namespace AuMVC.Controllers
 
         //deleteissue
 
-        ActionResult DeleteIssue(int id)
+        public ActionResult DeleteIssue(int id)
         {
             if (id == null)
             {
@@ -99,7 +99,7 @@ namespace AuMVC.Controllers
             }
 
 
-            if (_issueService.Exists(id))
+            if (!_issueService.Exists(id))
             {
                 return RedirectToAction("Index");
             }
@@ -108,12 +108,12 @@ namespace AuMVC.Controllers
 
 
         // POST: Issue/Delete
-        [HttpPost, ActionName("DeleteIssue")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmIssue(int id)
         {
             _issueService.Delete(id);
-            return RedirectToAction("Index");
+            return RedirectToAction("IndexIssue");
         }
     }
 }

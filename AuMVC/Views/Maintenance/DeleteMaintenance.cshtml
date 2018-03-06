@@ -34,13 +34,15 @@
 
     </dl>
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("DeleteConfirmMaintenance", "Maintenance", FormMethod.Post))
     {
-        @Html.AntiForgeryToken()
-        <div class="form-actions no-color">
+                @Html.HiddenFor(n => n.Id);
+
+                @Html.AntiForgeryToken()
+                <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" />
             |
-            @Html.ActionLink("Back to List", "IndexIssue")
+            @Html.ActionLink("Back to List", "IndexMaintenance")
         </div>
     }
 </div>

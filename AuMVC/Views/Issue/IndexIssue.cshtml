@@ -2,7 +2,7 @@
 @model List<Issue>
 
 @{
-    ViewData["Title"] = "IndexIssue";
+    ViewData["Title"] = "Issues";
 }
 
 <button type="button" class="btn btn-default">
@@ -12,7 +12,7 @@
 @if (Model.Any())
 {
 
-    <table class="table table-bordered table-hover">
+    <table class="table table-striped">
         <tr class="info">
             <td>Issue Code</td>
             <td>Date</td>
@@ -34,8 +34,8 @@
                     <td>@issue.Priority</td>
                     <td>@issue.Status</td>
                     <td>@issue.Note</td>
-                    <td>@Html.ActionLink("Edit", "EditIssue", "Issue", new { @id = issue.Id })</td>
-                    <td>@Html.ActionLink("Delete", "DeleteIssue", "Issue", new { @id = issue.Id })</td>
+                    <td type="button" class="btn btn-default">@Html.ActionLink("Edit", "EditIssue", "Issue", new { @id = issue.Id })</td>
+                    <td type="button" class="btn btn-default">@Html.ActionLink("Delete", "DeleteIssue", "Issue", new { @id = issue.Id })</td>
                 </tr>
             }
         </tbody>

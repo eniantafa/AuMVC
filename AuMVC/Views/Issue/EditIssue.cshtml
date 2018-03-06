@@ -1,50 +1,63 @@
-﻿@model AuMVC.Data.Models.Issue
+﻿@using AuMVC.Data.Enums;
+@model AuMVC.Data.Models.Issue
 @{
     ViewData["Title"] = "EditIssue";
 }
 
-<h2>EditIssue</h2>
+<h2>Edit Issue</h2>
 
 
 @using (Html.BeginForm("EditConfirm", "Issue", FormMethod.Post))
 {
 
 
-    <form>
+<form>
+    @Html.HiddenFor(m => m.Id)
+    <div class="form-group">
+        @Html.LabelFor(m => m.Code)
+        @Html.TextBoxFor(m => m.Code, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Code, "", new { @class = "text-danger" })
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(m => m.Code)
-            @Html.TextBoxFor(m => m.Code, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.Code, "", new { @class = "text-danger" })
-        </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Date)
+        @Html.TextBoxFor(m => m.Date, new { @class = "form-control", @type = "date" })
+        @Html.ValidationMessageFor(m => m.Date, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Category)
+        @Html.DropDownListFor(model => model.Category, Html.GetEnumSelectList<IssueCategory>(),
+                       "Issue Category", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Category, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Item)
+        @Html.TextBoxFor(m => m.Item, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Item, "", new { @class = "text-danger" })
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(m => m.Date)
-            @Html.TextBoxFor(m => m.Date, new { @class = "form-control" })
-        </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Priority)
+        @Html.DropDownListFor(model => model.Priority, Html.GetEnumSelectList<IssuePriority>(),
+                        "Issue Priority", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Priority, "", new { @class = "text-danger" })
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(m => m.Item)
-            @Html.TextBoxFor(m => m.Item, new { @class = "form-control" })
-        </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Status)
+        @Html.DropDownListFor(model => model.Status, Html.GetEnumSelectList<IssueStatus>(),
+                       "Issue Status", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Status, "", new { @class = "text-danger" })
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(m => m.Priority)
-            @Html.TextBoxFor(m => m.Priority, new { @class = "form-control" })
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(m => m.Status)
-            @Html.TextBoxFor(m => m.Status, new { @class = "form-control" })
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(m => m.Note)
-            @Html.TextBoxFor(m => m.Note, new { @class = "form-control" })
-        </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Note)
+        @Html.TextBoxFor(m => m.Note, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Note, "", new { @class = "text-danger" })
+    </div>
 
 
-        <button type="button" class="btn btn-primary">Save</button>
-    </form>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
 
 }

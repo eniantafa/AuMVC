@@ -4,7 +4,7 @@
     ViewBag.Title = "CreateMaintenance";
 }
 
-<h2>CreateMaintenance</h2>
+<h2>Create Maintenance</h2>
 
 @using (Html.BeginForm("CreateMaintenance", "Maintenance", FormMethod.Post))
 {
@@ -34,9 +34,10 @@
 
         <div class="form-group">
             @Html.LabelFor(m => m.Category)
-            @Html.DropDownList("MaintenanceCategory",
-                  Html.GetEnumSelectList<MaintenanceCategory>(),
-                  "Maintenance Category", new { @class = "form-control" })
+            @Html.DropDownListFor(model => model.Category,
+               Html.GetEnumSelectList<MaintenanceCategory>(),
+               "Maintenance Category", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Category, "", new { @class = "text-danger" })
 
         </div>
 
@@ -48,17 +49,19 @@
 
         <div class="form-group">
             @Html.LabelFor(m => m.Priority)
-            @Html.DropDownList("MaintenancePriority",
+            @Html.DropDownListFor(model=>model.Priority,
                      Html.GetEnumSelectList<MaintenancePriority>(),
-                     "<MaintenancePriority", new { @class = "form-control" })
+                     "MaintenancePriority", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Priority, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
             @Html.LabelFor(m => m.Status)
 
-            @Html.DropDownList("MaintenanceStatus",
-                  Html.GetEnumSelectList<MaintenanceStatus>(),
-                  "MaintenanceStatus", new { @class = "form-control" })
+            @Html.DropDownListFor(model => model.Status,
+               Html.GetEnumSelectList<MaintenanceStatus>(),
+               "MaintenanceStatus", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Status, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">

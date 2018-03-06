@@ -4,12 +4,9 @@
 
 <h1>Ausmar Project </h1>
 
-<ul class="list-unstyled">
+<ul class="list-group-item-heading">
     <li class="btn-info btn-lg " >
-        <div class="form-group">
-
-            
-        </div>Html.ActionLink("Sites", "Index", "Site")
+       @Html.ActionLink("Sites", "Index", "Site")
     </li>
     <li class="btn-info btn-lg">
         @Html.ActionLink("Issues", "IndexIssue", "Issue")
@@ -19,7 +16,7 @@
         @Html.ActionLink("Maintenance", "IndexMaintenance", "Maintenance")
     </li>
     <li class="btn-info btn-lg">
-        @Html.ActionLink("ProgressStage", "IndexProgressStage", "ProgressStage")
+        @Html.ActionLink("Progress Stage", "IndexProgressStage", "ProgressStage")
     </li>
     <li class="btn-info btn-lg">
         @Html.ActionLink("Variation", "IndexVariation", "Variation")

@@ -1,4 +1,5 @@
-﻿@model AuMVC.Data.Models.Maintenance
+﻿@using AuMVC.Data.Enums;
+@model AuMVC.Data.Models.Maintenance
 @{
     ViewData["Title"] = "EditMaintenance";
 }
@@ -11,7 +12,7 @@
 
 
     <form>
-
+        @Html.HiddenFor(m => m.Id)
         <div class="form-group">
             @Html.LabelFor(m => m.IssueCode)
             @Html.TextBoxFor(m => m.IssueCode, new { @class = "form-control" })
@@ -20,36 +21,49 @@
 
         <div class="form-group">
             @Html.LabelFor(m => m.DateRaised)
-            @Html.TextBoxFor(m => m.DateRaised, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.DateRaised, new { @class = "form-control", @type = "date" })
+            @Html.ValidationMessageFor(m => m.DateRaised, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
             @Html.LabelFor(m => m.Category)
-            @Html.TextBoxFor(m => m.Category, new { @class = "form-control" })
+            @Html.DropDownListFor(model => model.Category,
+                     Html.GetEnumSelectList<MaintenanceCategory>(),
+                     "Maintenance Category", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Category, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
             @Html.LabelFor(m => m.Item)
             @Html.TextBoxFor(m => m.Item, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.IssueCode, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
             @Html.LabelFor(m => m.Priority)
-            @Html.TextBoxFor(m => m.Priority, new { @class = "form-control" })
+            @Html.DropDownListFor(model => model.Priority,
+                  Html.GetEnumSelectList<MaintenancePriority>(),
+                  "MaintenancePriority", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Priority, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
             @Html.LabelFor(m => m.Status)
-            @Html.TextBoxFor(m => m.Status, new { @class = "form-control" })
+
+            @Html.DropDownListFor(model => model.Status,
+            Html.GetEnumSelectList<MaintenanceStatus>(),
+            "MaintenanceStatus", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Status, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
             @Html.LabelFor(m => m.Note)
             @Html.TextBoxFor(m => m.Note, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Note, "", new { @class = "text-danger" })
         </div>
 
 
-        <button type="button" class="btn btn-primary">Save</button>
+        <button type="submit" class="btn btn-primary">Save</button>
     </form>
 
 }

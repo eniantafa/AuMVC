@@ -2,7 +2,7 @@
 @model List<Site>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Sites";
 }
 
 
@@ -14,9 +14,9 @@
 
 @if (Model.Any())
 {
-    <table class="table">
+    <table class="table table-striped">
         <thead>
-            <tr>
+            <tr class="info">
                 <td>Site Number</td>
                 <td>Home Owner</td>
                 <td>Contact Number</td>
