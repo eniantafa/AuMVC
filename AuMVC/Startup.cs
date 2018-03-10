@@ -6,6 +6,7 @@ using AuMVC.Data;
 using AuMVC.Data.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -37,13 +38,26 @@ namespace AuMVC
             services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+
+
+            //konfigurimi i identity user
+            //Authentication, Identity config
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>();
+
+
+
             //konfigurimi i serviseve
             services.AddTransient<ISiteService, SiteService>();
             services.AddTransient<IIssueService, IssueService>();
             services.AddTransient<IMaintenanceService, MaintenanceService>();
             services.AddTransient<IProgressStageService, ProgressStageService>();
             services.AddTransient<IVariationService, VariationService>();
+
             services.AddMvc();
+            services.AddMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,6 +75,11 @@ namespace AuMVC
             }
 
             app.UseStaticFiles();
+
+            //authentication
+            app.UseAuthentication();
+
+            app.UseSession();
 
             app.UseMvc(routes =>
             {

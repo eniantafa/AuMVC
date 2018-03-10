@@ -4,24 +4,29 @@
 
 <h1>Ausmar Project </h1>
 
-<ul class="list-group-item-heading">
-    <li class="btn-info btn-lg " >
-       @Html.ActionLink("Sites", "Index", "Site")
-    </li>
-    <li class="btn-info btn-lg">
+<h3>Click on buttons to view the content</h3>
+
+    <div type="button" class="btn btn-default">
+        @Html.ActionLink("Sites", "Index", "Site")
+    </div>
+
+
+    <div type="button" class="btn btn-default">
         @Html.ActionLink("Issues", "IndexIssue", "Issue")
-    </li>
+    </div>
 
-    <li class="btn-info btn-lg">
+    <div type="button" class="btn btn-default">
         @Html.ActionLink("Maintenance", "IndexMaintenance", "Maintenance")
-    </li>
-    <li class="btn-info btn-lg">
-        @Html.ActionLink("Progress Stage", "IndexProgressStage", "ProgressStage")
-    </li>
-    <li class="btn-info btn-lg">
-        @Html.ActionLink("Variation", "IndexVariation", "Variation")
-    </li>
+    </div>
 
-</ul>
+
+    <div type="button" class="btn btn-default">
+        @Html.ActionLink("Progress Stage", "IndexProgressStage", "ProgressStage")
+    </div>
+
+    <div type="button" class="btn btn-default">
+        @Html.ActionLink("Variation", "IndexVariation", "Variation")
+    </div>
+
 
 
