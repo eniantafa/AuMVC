@@ -1,5 +1,7 @@
 # AuMVC
 .NET Core MVC App to manage work packages and progress in your company.
+
+
 MVC App using ASP.NET Core, Entity Framework Core and Code First Pattern##
 
 Technologies used: •	ASP.NET Core •	Entity Framework Core •	Entity Framework Migrations – Code First •Razor Engine •Dependency Injection •LINQ •Repository Pattern
